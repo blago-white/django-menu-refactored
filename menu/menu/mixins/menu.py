@@ -6,7 +6,7 @@ from ..services.menu import MenuService
 from . import base
 
 
-__all__ = ["MenuViewMixin", "MenuDetailViewMixin"]
+__all__ = ["MenuViewMixin", "MenuItemsViewMixin"]
 
 
 class MenuViewMixin(base.ServiceViewMixin):
@@ -18,7 +18,7 @@ class MenuViewMixin(base.ServiceViewMixin):
         return self._service.get_standalone_menues()
 
 
-class MenuDetailViewMixin(MenuViewMixin, base.ServiceViewMixin):
+class MenuItemsViewMixin(MenuViewMixin, base.ServiceViewMixin):
     template_name = "menu.html"
     _service: MenuService
 
