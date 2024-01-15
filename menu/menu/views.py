@@ -7,5 +7,5 @@ class MenuesListView(mixins.MenuViewMixin, mixins.ModelListViewMixin, mixins.Mai
     pass
 
 
-class MenuItemsListView(mixins.MenuDetailViewMixin, ListView):
+class MenuItemsListView(mixins.MenuItemsViewMixin, ListView):
     slug_url_kwarg = "slug"
