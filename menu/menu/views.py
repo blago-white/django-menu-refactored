@@ -1,7 +1,7 @@
 from django.views.generic import ListView
-from django.http import HttpResponse
+
+from . import models, mixins
 
 
-class MenuesListView(ListView):
-    def get(self, request, *args, **kwargs):
-        return HttpResponse("Hello world!")
+class MenuesListView(mixins.MenuViewMixin, mixins.ModelListViewMixin, ListView):
+    pass

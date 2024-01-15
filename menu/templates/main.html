@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Menu site!
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for obj in objects_list %}
+            <li>{{ obj }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
