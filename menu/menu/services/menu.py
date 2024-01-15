@@ -12,3 +12,12 @@ class MenuService(BaseService):
 
     def get_all(self) -> models.QuerySet:
         return self._model.objects.all()
+
+    def get(self, slug: str) -> models.Model:
+        return self._model.get(pk=slug)
+
+    def get_childs(self, slug: str) -> models.QuerySet:
+        return self._model.objects.filter(parent=slug)
+
+    def get_standalone_menues(self) -> models.QuerySet:
+        return self.get_all().filter(parent=None)

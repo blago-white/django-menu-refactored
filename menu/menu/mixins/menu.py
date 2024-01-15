@@ -3,11 +3,24 @@ from django.db import models
 from .. import models
 from ..services.menu import MenuService
 
+from . import base
 
-__all__ = ["MenuViewMixin"]
+
+__all__ = ["MenuViewMixin", "MenuDetailViewMixin"]
 
 
-class MenuViewMixin:
+class MenuViewMixin(base.ServiceViewMixin):
     model = models.Menu
     service = MenuService
-    template_name = "main.html"
+    _service: MenuService
+
+    def get_queryset(self):
+        return self._service.get_standalone_menues()
+
+
+class MenuDetailViewMixin(MenuViewMixin, base.ServiceViewMixin):
+    template_name = "menu.html"
+    _service: MenuService
+
+    def get_queryset(self):
+        return self._service.get_childs(slug=self.kwargs.get(self.slug_url_kwarg))
