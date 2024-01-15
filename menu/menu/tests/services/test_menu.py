@@ -46,7 +46,7 @@ class MenuServiceTestCase(TestCase):
         self.assertEqual(standalones.count(), len(self._test_menues))
 
         self.assertTrue(all(
-            [menu.parent is None for menu in standalones]
+            [menu_.parent is None for menu_ in standalones]
         ))
 
     def _create_test_menues(self) -> None:
@@ -69,7 +69,7 @@ class MenuServiceTestCase(TestCase):
         if not self._test_menues:
             self._create_test_menues()
 
-        for menu in self._test_menues:
-            menu.parent = self._test_menu
+        for menu_ in self._test_menues:
+            menu_.parent = self._test_menu
 
         Menu.objects.bulk_update(self._test_menues, ["parent"])
