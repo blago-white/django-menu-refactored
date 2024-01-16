@@ -3,9 +3,10 @@ from django.db import models
 
 
 class BaseService(metaclass=ABCMeta):
-    @abstractmethod
+    _model: models.Model
+
     def __init__(self, model: models.Model) -> None:
-        raise NotImplemented
+        self._model = model
 
     @abstractmethod
     def get_all(self) -> models.QuerySet:

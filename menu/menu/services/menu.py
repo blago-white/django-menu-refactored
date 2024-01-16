@@ -8,7 +8,7 @@ class MenuService(BaseService):
     _model: Menu
 
     def __init__(self, model: Menu):
-        self._model = model
+        super().__init__(model=model)
 
     def get_all(self) -> models.QuerySet:
         return self._model.objects.all()
@@ -17,7 +17,7 @@ class MenuService(BaseService):
         return self._model.objects.get(pk=slug)
 
     def get_childs(self, slug: str) -> models.QuerySet:
-        return self._model.objects.filter(parent=slug)
+        return self._model.objects.filter(parent=slug).defer("parent_id")
 
     def get_standalone_menues(self) -> models.QuerySet:
-        return self.get_all().filter(parent=None)
+        return self.get_all().filter(parent=None).defer("parent_id")

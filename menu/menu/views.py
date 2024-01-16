@@ -1,6 +1,6 @@
 from django.views.generic import ListView
 
-from . import models, mixins
+from . import mixins
 
 
 class MenuesListView(mixins.MenuViewMixin, mixins.ModelListViewMixin, mixins.MainPageViewMixin, ListView):

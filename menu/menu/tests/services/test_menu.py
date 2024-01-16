@@ -30,20 +30,23 @@ class MenuServiceTestCase(MenuModelTestCaseMixin, TestCase):
             self._test_service.get(slug="Test")
 
         self.create_test_menu()
+
         self.assertEqual(self._test_service.get(slug=self.test_menu.slug), self.test_menu)
 
     def test_get_childs(self):
         self.assertFalse(self._test_service.get_childs(slug="Test").exists())
+
         self.add_test_menu_childs()
+
         self.assertEqual(self._test_service.get_childs(self.test_menu.slug).count(),
                          len(self.test_menues))
 
     def test_get_standalone_menues(self):
         self.assertFalse(self._test_service.get_standalone_menues().exists())
+
         self.create_test_menues()
 
         standalones = self._test_service.get_standalone_menues()
 
         self.assertEqual(standalones.count(), len(self.test_menues))
-
-        self.assertFalse(any(list(standalones.values_list("parent", flat=True))))
+        self.assertFalse(any(standalones.values_list("parent", flat=True)))
